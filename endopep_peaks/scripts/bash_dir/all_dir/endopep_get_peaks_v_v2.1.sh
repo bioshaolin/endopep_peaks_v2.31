@@ -43,7 +43,7 @@ rm -f test2.csv
 rm -f test3.csv
 rm -f compile.csv
 
-ssconvert endopep_peak_list_0_$(date +%m.%d.%Y).xlsx endo.csv
+ssconvert endopep_peak_list_0_$(date +%m.%d.%Y).xlsx endo.csv 2>/dev/null
 python ~/endopep_peaks/scripts/py_dir/vis_dir/stack_visual_all.py
 rm -f endo.csv
 

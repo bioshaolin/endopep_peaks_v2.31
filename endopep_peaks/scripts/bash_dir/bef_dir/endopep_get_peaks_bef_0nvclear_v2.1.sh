@@ -139,7 +139,7 @@ rm -f test2.csv
 rm -f test3.csv
 rm -f compile.csv
 
-ssconvert endopep_peak_list_0.xlsx endo.csv
+ssconvert endopep_peak_list_0.xlsx endo.csv 2>/dev/null
 python ~/endopep_peaks/scripts/py_dir/vis_dir/stack_visual_bef.py
 rm -f endo.csv
 
