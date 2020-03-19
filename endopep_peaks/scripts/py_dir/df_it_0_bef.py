@@ -700,6 +700,7 @@ cols.insert(8, cols.pop(cols.index('sn_Intact_B')))
 df_ba = df_ba.reindex(columns=cols)
 
 df_ba1 = df_ba.drop(df_ba.index[0])
+df_ba1.sort_values(['date','plate','bot_id'], ascending=[True,True,True],  inplace=True)
 print(df_ba1)
 df_ba1.to_csv("b_final_df.txt", sep="\t")
 
@@ -772,6 +773,7 @@ cols.insert(8, cols.pop(cols.index('sn_Intact_E')))
 df_ea = df_ea.reindex(columns=cols)
 
 df_ea1 = df_ea.drop(df_ea.index[0])
+df_ea1.sort_values(['date','plate','bot_id'], ascending=[True,True,True],  inplace=True)
 print(df_ea1)
 df_ea1.to_csv("e_final_df.txt", sep="\t")
 
@@ -861,6 +863,7 @@ cols.insert(12, cols.pop(cols.index('sn_Intact_F')))
 df_fa = df_fa.reindex(columns=cols)
 
 df_fa1 = df_fa.drop(df_fa.index[0])
+df_fa1.sort_values(['date','plate','bot_id'], ascending=[True,True,True],  inplace=True)
 print(df_fa1)
 df_fa1.to_csv("f_final_df.txt", sep="\t")
 
@@ -880,14 +883,9 @@ df_fb = pd.read_csv(f_df_fin, sep="\t")
 print(df_fb.columns)
 
 
-##### Below is two line changes to merge 3 dfs as oppossed to option all for 4 #####
+df_final = pd.concat([df_bb,df_eb,df_fb], axis=1, join_axes=[df_bb.index])
 
-df_fin1 = pd.merge(pd.merge(df_bb,df_eb,on=['date','plate','bot_id']),df_fb,on=['date','plate','bot_id'])
-df_final = df_fin1.groupby(['date','plate','bot_id']).head(2)
 
-#####################################################################################
-
-df_final.to_csv("test3.csv", sep="\t")
 print(df_final)
 df_final = df_final.loc[:, ~df_final.columns.str.contains('^Unnamed')]
 df_final = df_final.loc[:, ~df_final.columns.duplicated()]

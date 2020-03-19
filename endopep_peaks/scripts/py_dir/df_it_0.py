@@ -907,6 +907,7 @@ cols.insert(8, cols.pop(cols.index('sn_Intact_A')))
 df_aa = df_aa.reindex(columns=cols)
 
 df_aa1 = df_aa.drop(df_aa.index[0])
+df_aa1.sort_values(['date','plate','bot_id'], ascending=[True,True,True],  inplace=True)
 print(df_aa1)
 df_aa1.to_csv("a_final_df.txt", sep="\t")
 
@@ -979,6 +980,7 @@ cols.insert(8, cols.pop(cols.index('sn_Intact_B')))
 df_ba = df_ba.reindex(columns=cols)
 
 df_ba1 = df_ba.drop(df_ba.index[0])
+df_ba1.sort_values(['date','plate','bot_id'], ascending=[True,True,True],  inplace=True)
 print(df_ba1)
 df_ba1.to_csv("b_final_df.txt", sep="\t")
 
@@ -1051,6 +1053,7 @@ cols.insert(8, cols.pop(cols.index('sn_Intact_E')))
 df_ea = df_ea.reindex(columns=cols)
 
 df_ea1 = df_ea.drop(df_ea.index[0])
+df_ea1.sort_values(['date','plate','bot_id'], ascending=[True,True,True],  inplace=True)
 print(df_ea1)
 df_ea1.to_csv("e_final_df.txt", sep="\t")
 
@@ -1140,6 +1143,7 @@ cols.insert(12, cols.pop(cols.index('sn_Intact_F')))
 df_fa = df_fa.reindex(columns=cols)
 
 df_fa1 = df_fa.drop(df_fa.index[0])
+df_fa1.sort_values(['date','plate','bot_id'], ascending=[True,True,True],  inplace=True)
 print(df_fa1)
 df_fa1.to_csv("f_final_df.txt", sep="\t")
 
@@ -1153,28 +1157,51 @@ e_df_fin = open("e_final_df.txt", "r")
 f_df_fin = open("f_final_df.txt", "r")
 
 df_ab = pd.read_csv(a_df_fin,sep="\t")
-df_ab.to_csv("test.csv", sep="\t")
 print(df_ab.columns)
+#df_ab.to_csv("testa.csv", sep="\t")
+
 df_bb = pd.read_csv(b_df_fin, sep="\t")
 print(df_bb.columns)
+#df_bb.to_csv("testb.csv", sep="\t")
+
 df_eb = pd.read_csv(e_df_fin, sep="\t")
 print(df_eb.columns)
+#df_eb.to_csv("teste.csv", sep="\t")
+
 df_fb = pd.read_csv(f_df_fin, sep="\t")
 print(df_fb.columns)
+#df_fb.to_csv("testf.csv", sep="\t")
 
 
-df_fin1 = pd.merge(df_ab,df_bb ,on=['date','plate','bot_id'], how="left")
+df_fin1 = pd.merge(df_ab,df_bb,on=['date','plate','bot_id'], how='inner')
+df_fin1['key'] = np.arange(len(df_fin1))
+#df_fin1.to_csv('test1.5.tsv', sep='\t')
 print(df_fin1)
-df_fin1.to_csv("test2.csv", sep="\t")
-df_fin2 = pd.merge(df_eb,df_fb ,on=['date','plate','bot_id'], how="left")
+#df_fin1.to_csv("test2.tsv", sep="\t")
+
+df_fin2 = pd.merge(df_eb,df_fb ,on=['date','plate','bot_id'], how='inner')
+df_fin2['key'] = np.arange(len(df_fin2))
 print(df_fin2)
-df_final = pd.concat([df_fin1, df_fin2], axis=1)
-df_final = df_final[::2]
-df_final.to_csv("test3.csv", sep="\t")
+#df_fin2.to_csv("test3.csv", sep="\t")
+
+df_final = pd.concat([df_fin1,df_fin2], axis=1, join_axes=[df_fin1.index])
+
+df_final = df_final[np.mod(np.arange(df_final.index.size),4)!=1]
+df_final = df_final[np.mod(np.arange(df_final.index.size),3)!=1]
+
+#df_final.to_csv("test4.tsv", sep="\t")
 print(df_final)
 df_final = df_final.loc[:, ~df_final.columns.str.contains('^Unnamed')]
 df_final = df_final.loc[:, ~df_final.columns.duplicated()]
-#df_final.to_csv("test.csv", sep="\t")
+df_final.drop_duplicates(subset=['date','plate','bot_id','LC_A','sn_LC_A',\
+'HC_A','sn_HC_A','Intact_A','sn_Intact_A','LC_B','sn_LC_B', 'HC_B', 'sn_HC_B',\
+'Intact_B','sn_Intact_B', 'LC_E','sn_LC_E', 'HC_E', 'sn_HC_E', 'Intact_E',\
+'sn_Intact_E','LC_F','sn_LC_F','HC_F','sn_HC_F','Intact_F','sn_Intact_F'],keep='first', inplace=True)
+df_final.drop('key',axis=1,inplace=True)
+#test5 = df_final
+#test5.to_csv("test5.tsv",sep="\t", index=False)
+
+
 
 def highlight_1(s):
 	color = '#FF6666'
@@ -1205,8 +1232,7 @@ df_final_2 = df_final[['date','plate','bot_id','LC_A','sn_LC_A','HC_A','sn_HC_A'
 'Intact_B','sn_Intact_B','LC_E','sn_LC_E','HC_E','sn_HC_E','Intact_E','sn_Intact_E','LC_F','sn_LC_F','HC_F','sn_HC_F','Intact_F','sn_Intact_F']]
 df_final_2.columns = ['date','plate','bot_id','Peak_1_A','sn_Peak_1_A','Peak_2_A','sn_Peak_2_A','Intact_A','sn_Intact_A','Peak_1_B','sn_Peak_1_B','Peak_2_B','sn_Peak_2_B',\
 'Intact_B','sn_Intact_B','Peak_1_E','sn_Peak_1_E','Peak_2_E','sn_Peak_2_E','Intact_E','sn_Intact_E','Peak_1_F','sn_Peak_1_F','Peak_2_F','sn_Peak_2_F','Intact_F','sn_Intact_F']
-df_final_3 = df_final_2.copy()
-df_final_2 = df_final_2.sort_values(['date', 'plate', 'bot_id'])
+df_final_2.sort_values(['date', 'plate', 'bot_id'], inplace=True)
 df_final_2 = df_final_2.reset_index(drop=True).style.applymap(highlight_1, subset=pd.IndexSlice[:, ['Peak_1_A','Peak_2_A','Intact_A']]) \
 .applymap(highlight_2, subset=pd.IndexSlice[:, ['sn_Peak_1_A', 'sn_Peak_2_A','sn_Intact_A']]) \
 .applymap(highlight_3, subset=pd.IndexSlice[:, ['Peak_1_B','Peak_2_B','Intact_B']]) \

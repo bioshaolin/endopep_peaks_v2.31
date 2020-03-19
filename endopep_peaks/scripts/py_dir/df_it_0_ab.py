@@ -498,6 +498,7 @@ cols.insert(8, cols.pop(cols.index('sn_Intact_A')))
 df_aa = df_aa.reindex(columns=cols)
 
 df_aa1 = df_aa.drop(df_aa.index[0])
+df_aa1.sort_values(['date','plate','bot_id'], ascending=[True,True,True],  inplace=True)
 print(df_aa1)
 df_aa1.to_csv("a_final_df.txt", sep="\t")
 
@@ -570,6 +571,7 @@ cols.insert(8, cols.pop(cols.index('sn_Intact_B')))
 df_ba = df_ba.reindex(columns=cols)
 
 df_ba1 = df_ba.drop(df_ba.index[0])
+df_ba1.sort_values(['date','plate','bot_id'], ascending=[True,True,True],  inplace=True)
 print(df_ba1)
 df_ba1.to_csv("b_final_df.txt", sep="\t")
 
@@ -589,13 +591,12 @@ df_bb = pd.read_csv(b_df_fin, sep="\t")
 print(df_bb.columns)
 
 
-df_fin1 = pd.merge(df_ab,df_bb ,on=['date','plate','bot_id'], how="left")
+df_fin1 = pd.concat([df_ab,df_bb], axis=1, join_axes=[df_ab.index])
+
 print(df_fin1)
 df_fin1.to_csv("test2.csv", sep="\t")
-#df_fin2 = pd.merge(df_eb,df_fb ,on=['date','plate','bot_id'], how="left")
-#print(df_fin2)
-#df_final = pd.concat([df_fin1, df_fin2], axis=1)
-df_final = df_fin1[::2]
+
+df_final = df_fin1
 df_final.to_csv("test3.csv", sep="\t")
 print(df_final)
 df_final = df_final.loc[:, ~df_final.columns.str.contains('^Unnamed')]

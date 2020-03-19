@@ -329,7 +329,7 @@ print(df_fin2)
 df_final = pd.concat([df_fin1, df_fin2], axis=1)
 '''
 
-df_final = df_ab[::2]
+df_final = df_ab
 df_final.to_csv("test3.csv", sep="\t")
 print(df_final)
 df_final = df_final.loc[:, ~df_final.columns.str.contains('^Unnamed')]

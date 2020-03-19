@@ -21,7 +21,7 @@ epilog = textwrap.dedent('''\
 ################################
 Development: E.W. Getz, 2020
 Version: v2.30
-Source: https://github.com/bioshaolin/endopep_peaks
+Source: https://github.com/bioshaolin/endopep_peaks_v2.30
 CDC/ DDID/ NCEZID/ DFWED/ EDLB/
 '''))
 tutorial = parser.add_argument_group('## tutorials')

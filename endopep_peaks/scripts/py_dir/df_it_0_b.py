@@ -302,7 +302,7 @@ print(df_ba1)
 df_ba1.to_csv("b_final_df.txt", sep="\t")
 
 
-df_final = df_ba1[::2]
+df_final = df_ba1
 df_final.to_csv("test3.csv", sep="\t")
 print(df_final)
 df_final = df_final.loc[:, ~df_final.columns.str.contains('^Unnamed')]

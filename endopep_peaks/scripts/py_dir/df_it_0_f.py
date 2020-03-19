@@ -313,7 +313,7 @@ df_fa1 = df_fa.drop(df_fa.index[0])
 print(df_fa1)
 df_fa1.to_csv("f_final_df.txt", sep="\t")
 
-df_final = df_fa1[::2]
+df_final = df_fa1
 df_final.to_csv("test3.csv", sep="\t")
 print(df_final)
 df_final = df_final.loc[:, ~df_final.columns.str.contains('^Unnamed')]
