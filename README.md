@@ -12,7 +12,9 @@ git clone https://github.com/bioshaolin/endopep_peaks_v2.30.git
 External:\
 . endopep_peaks_v2.30/endopep_peaks/scripts/init_bash_dir/set_path.sh\
 CDC:\
-. endopep_peaks_v2.30/endopep_peaks/scripts/init_bash_dir/set_path_cdc.sh
+. endopep_peaks_v2.30/endopep_peaks/scripts/init_bash_dir/set_path_cdc.sh\
+source .bashrc\
+init_cdc
 
 #########################################################
 
@@ -57,7 +59,7 @@ usage: endopep_peaks [-h] [-read] [-dep] [-init INIT] [-vid_mods]
   -read, --read         Show Read.me\
   -dep, --dependencies  List the program dependencies for endopep_peaks\
   -init INIT            [initialize:HPC] or install dependencies\
-                        (cdc/external)
+                        (cdc/external) only if prev. run in 24hr
 
 ## tutorials:
   -vids, --modules  Download tutorial modules (required for tutorial)\
