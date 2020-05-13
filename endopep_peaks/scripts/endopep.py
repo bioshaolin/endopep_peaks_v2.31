@@ -20,8 +20,8 @@ sn = signal to noise value''',\
 epilog = textwrap.dedent('''\
 ################################
 Development: E.W. Getz, 2020
-Version: v2.30
-Source: https://github.com/bioshaolin/endopep_peaks_v2.30
+Version: v2.31
+Source: https://github.com/bioshaolin/endopep_peaks_v2.31
 CDC/ DDID/ NCEZID/ DFWED/ EDLB/
 '''))
 tutorial = parser.add_argument_group('## tutorials')
