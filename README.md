@@ -7,7 +7,7 @@
     *********************
 ### Download and set path ############################################
 
-git clone https://github.com/bioshaolin/endopep_peaks_v2.30.git
+git clone https://github.com/bioshaolin/endopep_peaks_v2.31.git
 
 External:\
 . endopep_peaks_v2.30/endopep_peaks/scripts/init_bash_dir/set_path.sh\
