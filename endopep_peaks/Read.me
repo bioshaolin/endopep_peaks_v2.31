@@ -10,9 +10,9 @@
 git clone https://github.com/bioshaolin/endopep_peaks_v2.31.git
 
 External:\
-. endopep_peaks_v2.30/endopep_peaks/scripts/init_bash_dir/set_path.sh\
+. endopep_peaks_v2.31/endopep_peaks/scripts/init_bash_dir/set_path.sh\
 CDC:\
-. endopep_peaks_v2.30/endopep_peaks/scripts/init_bash_dir/set_path_cdc.sh\
+. endopep_peaks_v2.31/endopep_peaks/scripts/init_bash_dir/set_path_cdc.sh\
 source .bashrc\
 init_cdc
 
