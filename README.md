@@ -83,7 +83,7 @@ usage: endopep_peaks [-h] [-read] [-dep] [-init INIT] [-vid_mods]
 ################################\
 Development: E.W. Getz, 2020\
 Version: v2.30\
-Source: https://github.com/bioshaolin/endopep_peaks_v2.30 \
+Source: https://github.com/bioshaolin/endopep_peaks_v2.31 \
 CDC/ DDID/ NCEZID/ DFWED/ EDLB/\
 
     ************
